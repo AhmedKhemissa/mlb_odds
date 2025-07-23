@@ -1,0 +1,8 @@
+{
+  "env": {
+    "ODDS_API_KEY": "@odds_api_key",
+    "ODDS_API_BASE_URL": "https://api.the-odds-api.com/v4",
+    "NEXTAUTH_SECRET": "@nextauth_secret",
+    "ALLOWED_USERS": "@allowed_users"
+  }
+}

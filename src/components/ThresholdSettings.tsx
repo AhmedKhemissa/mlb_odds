@@ -59,15 +59,15 @@ export default function ThresholdSettings({ userThresholds, onSaveThreshold, onC
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+      <div className="bg-gray-800 rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden border border-gray-700">
+        <div className="flex items-center justify-between p-6 border-b border-gray-700">
           <div className="flex items-center space-x-2">
-            <Settings className="w-6 h-6 text-gray-600" />
-            <h2 className="text-xl font-semibold text-gray-900">Streak Alert Thresholds</h2>
+            <Settings className="w-6 h-6 text-gray-300" />
+            <h2 className="text-xl font-semibold text-white">Streak Alert Thresholds</h2>
           </div>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-gray-200"
           >
             <X className="w-6 h-6" />
           </button>
@@ -76,13 +76,13 @@ export default function ThresholdSettings({ userThresholds, onSaveThreshold, onC
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
           {/* Team Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Select Team
             </label>
             <select
               value={selectedTeam}
               onChange={(e) => handleTeamSelect(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="">Choose a team...</option>
               {MLB_TEAMS.map(team => (
@@ -96,14 +96,14 @@ export default function ThresholdSettings({ userThresholds, onSaveThreshold, onC
           {/* Threshold Configuration */}
           {selectedTeam && (
             <div className="space-y-6 mb-6">
-              <div className="bg-gray-50 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-4">
+              <div className="bg-gray-700 rounded-lg p-4 border border-gray-600">
+                <h3 className="font-medium text-white mb-4">
                   Alert Thresholds for {MLB_TEAMS.find(t => t.id === selectedTeam)?.shortName}
                 </h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       Win Streak Threshold
                     </label>
                     <input
@@ -115,13 +115,13 @@ export default function ThresholdSettings({ userThresholds, onSaveThreshold, onC
                         ...thresholds,
                         winStreakThreshold: parseInt(e.target.value) || 0
                       })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
-                    <p className="text-xs text-gray-500 mt-1">Alert when team wins this many games in a row</p>
+                    <p className="text-xs text-gray-400 mt-1">Alert when team wins this many games in a row</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       Loss Streak Threshold
                     </label>
                     <input
@@ -133,13 +133,13 @@ export default function ThresholdSettings({ userThresholds, onSaveThreshold, onC
                         ...thresholds,
                         lossStreakThreshold: parseInt(e.target.value) || 0
                       })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
-                    <p className="text-xs text-gray-500 mt-1">Alert when team loses this many games in a row</p>
+                    <p className="text-xs text-gray-400 mt-1">Alert when team loses this many games in a row</p>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-300 mb-1">
                       Over Streak Threshold
                     </label>
                     <input

@@ -20,20 +20,20 @@ export default function LoginForm({ onLogin, isLoading, error }: LoginFormProps)
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-blue-700">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-gray-800">
       <div className="max-w-md w-full mx-4">
-        <div className="bg-white rounded-lg shadow-xl p-8">
+        <div className="bg-gray-800 rounded-lg shadow-xl p-8 border border-gray-700">
           <div className="text-center mb-8">
             <div className="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
               <LogIn className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900">MLB Odds Tracker</h1>
-            <p className="text-gray-600 mt-2">Sign in to access the dashboard</p>
+            <h1 className="text-2xl font-bold text-white">MLB Odds Tracker</h1>
+            <p className="text-gray-300 mt-2">Sign in to access the dashboard</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
                 Email Address
               </label>
               <input
@@ -42,14 +42,14 @@ export default function LoginForm({ onLogin, isLoading, error }: LoginFormProps)
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                 placeholder="Enter your email"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -59,7 +59,7 @@ export default function LoginForm({ onLogin, isLoading, error }: LoginFormProps)
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-3 py-2 pr-10 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-400"
                   placeholder="Enter your password"
                   disabled={isLoading}
                 />
@@ -79,8 +79,8 @@ export default function LoginForm({ onLogin, isLoading, error }: LoginFormProps)
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-md p-3">
-                <p className="text-sm text-red-600">{error}</p>
+              <div className="bg-red-900 border border-red-700 rounded-md p-3">
+                <p className="text-sm text-red-300">{error}</p>
               </div>
             )}
 
@@ -101,7 +101,7 @@ export default function LoginForm({ onLogin, isLoading, error }: LoginFormProps)
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-400">
               Access is limited to authorized users only
             </p>
           </div>

@@ -21,11 +21,11 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
   };
 
   const getStreakColor = (streak: number, type: 'win' | 'loss') => {
-    if (streak === 0) return 'text-gray-500';
+    if (streak === 0) return 'text-gray-400';
     if (type === 'win') {
-      return streak >= 3 ? 'text-green-600 font-bold' : 'text-green-500';
+      return streak >= 3 ? 'text-green-400 font-bold' : 'text-green-500';
     } else {
-      return streak >= 3 ? 'text-red-600 font-bold' : 'text-red-500';
+      return streak >= 3 ? 'text-red-400 font-bold' : 'text-red-500';
     }
   };
 
@@ -51,8 +51,8 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
         )}
       </div>
       <div className="flex-1">
-        <div className="font-medium text-gray-900">{team.shortName}</div>
-        <div className="text-sm text-gray-500">{team.city}</div>
+        <div className="font-medium text-white">{team.shortName}</div>
+        <div className="text-sm text-gray-400">{team.city}</div>
         {streak && (
           <div className="flex space-x-2 text-xs mt-1">
             <span className={getStreakColor(streak.winStreak, 'win')}>
@@ -71,12 +71,12 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
     if (!odds) return null;
 
     return (
-      <div className="bg-gray-50 rounded p-3">
+      <div className="bg-gray-700 rounded p-3">
         <div className="flex items-center space-x-2 mb-2">
           {icon}
-          <span className="font-medium text-sm text-gray-700">{title}</span>
+          <span className="font-medium text-sm text-gray-300">{title}</span>
         </div>
-        <div className="space-y-1 text-sm">
+        <div className="space-y-1 text-sm text-gray-200">
           {title === 'Money Line' && (
             <>
               <div className="flex justify-between">
@@ -119,14 +119,14 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+    <div className="bg-gray-800 rounded-lg shadow-md border border-gray-700 overflow-hidden">
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-gray-400">
             {format(new Date(game.commenceTime), 'h:mm a')}
           </div>
           {game.result && (
-            <div className="text-sm font-medium text-green-600">Final</div>
+            <div className="text-sm font-medium text-green-400">Final</div>
           )}
         </div>
 
@@ -134,7 +134,7 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
           {/* Away Team */}
           {renderTeamInfo(game.awayTeam, awayStreak)}
           
-          <div className="text-center text-gray-400 font-medium">vs</div>
+          <div className="text-center text-gray-500 font-medium">vs</div>
           
           {/* Home Team */}
           {renderTeamInfo(game.homeTeam, homeStreak)}
@@ -152,16 +152,16 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
           )}
           {game.odds.runLine && (
             <div className="text-center">
-              <div className="text-gray-500">RL</div>
-              <div className="font-mono">
+              <div className="text-gray-400">RL</div>
+              <div className="font-mono text-gray-200">
                 {game.odds.runLine.away.point > 0 ? '+' : ''}{game.odds.runLine.away.point} / {game.odds.runLine.home.point > 0 ? '+' : ''}{game.odds.runLine.home.point}
               </div>
             </div>
           )}
           {game.odds.total && (
             <div className="text-center">
-              <div className="text-gray-500">O/U</div>
-              <div className="font-mono">{game.odds.total.over.point}</div>
+              <div className="text-gray-400">O/U</div>
+              <div className="font-mono text-gray-200">{game.odds.total.over.point}</div>
             </div>
           )}
         </div>
@@ -169,7 +169,7 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
         {/* Expand/Collapse Button */}
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="w-full mt-3 flex items-center justify-center py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded transition-colors"
+          className="w-full mt-3 flex items-center justify-center py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-700 rounded transition-colors"
         >
           <span className="mr-1">
             {isExpanded ? 'Less Details' : 'More Details'}
@@ -184,7 +184,7 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="border-t border-gray-200 p-4 bg-gray-50">
+        <div className="border-t border-gray-700 p-4 bg-gray-900">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {renderOddsSection('Money Line', game.odds.moneyLine, <TrendingUp className="w-4 h-4" />)}
             {renderOddsSection('Run Line', game.odds.runLine, <TrendingDown className="w-4 h-4" />)}
@@ -193,28 +193,28 @@ export default function GameCard({ game, homeStreak, awayStreak, onThresholdAler
 
           {/* Streak Information */}
           {(homeStreak || awayStreak) && (
-            <div className="mt-4 pt-4 border-t border-gray-200">
-              <h4 className="font-medium text-gray-700 mb-3">Team Streaks</h4>
+            <div className="mt-4 pt-4 border-t border-gray-700">
+              <h4 className="font-medium text-gray-300 mb-3">Team Streaks</h4>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 {awayStreak && (
                   <div>
-                    <div className="font-medium">{game.awayTeam.shortName}</div>
-                    <div className="space-y-1 mt-1">
+                    <div className="font-medium text-gray-200">{game.awayTeam.shortName}</div>
+                    <div className="space-y-1 mt-1 text-gray-300">
                       <div>Win: <span className={getStreakColor(awayStreak.winStreak, 'win')}>{awayStreak.winStreak}</span></div>
                       <div>Loss: <span className={getStreakColor(awayStreak.lossStreak, 'loss')}>{awayStreak.lossStreak}</span></div>
-                      <div>Over: <span className="text-blue-600">{awayStreak.overStreak}</span></div>
-                      <div>Under: <span className="text-purple-600">{awayStreak.underStreak}</span></div>
+                      <div>Over: <span className="text-blue-400">{awayStreak.overStreak}</span></div>
+                      <div>Under: <span className="text-purple-400">{awayStreak.underStreak}</span></div>
                     </div>
                   </div>
                 )}
                 {homeStreak && (
                   <div>
-                    <div className="font-medium">{game.homeTeam.shortName}</div>
-                    <div className="space-y-1 mt-1">
+                    <div className="font-medium text-gray-200">{game.homeTeam.shortName}</div>
+                    <div className="space-y-1 mt-1 text-gray-300">
                       <div>Win: <span className={getStreakColor(homeStreak.winStreak, 'win')}>{homeStreak.winStreak}</span></div>
                       <div>Loss: <span className={getStreakColor(homeStreak.lossStreak, 'loss')}>{homeStreak.lossStreak}</span></div>
-                      <div>Over: <span className="text-blue-600">{homeStreak.overStreak}</span></div>
-                      <div>Under: <span className="text-purple-600">{homeStreak.underStreak}</span></div>
+                      <div>Over: <span className="text-blue-400">{homeStreak.overStreak}</span></div>
+                      <div>Under: <span className="text-purple-400">{homeStreak.underStreak}</span></div>
                     </div>
                   </div>
                 )}

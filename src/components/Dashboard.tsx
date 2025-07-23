@@ -152,20 +152,20 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   const alertCount = activeAlerts.length;
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-900">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-gray-800 shadow-sm border-b border-gray-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Trophy className="w-8 h-8 text-blue-600" />
-                <h1 className="text-xl font-bold text-gray-900">MLB Odds Tracker</h1>
+                <Trophy className="w-8 h-8 text-blue-400" />
+                <h1 className="text-xl font-bold text-white">MLB Odds Tracker</h1>
               </div>
               {lastUpdated && (
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-300">
                   <div>Last updated: {format(lastUpdated, 'h:mm:ss a')}</div>
-                  <div className="text-xs text-green-600">📡 Live data from The Odds API</div>
+                  <div className="text-xs text-green-400">📡 Live data from The Odds API</div>
                 </div>
               )}
             </div>
@@ -173,7 +173,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
             <div className="flex items-center space-x-4">
               {/* Active Alerts */}
               {alertCount > 0 && (
-                <div className="flex items-center space-x-2 px-3 py-1 bg-orange-100 text-orange-800 rounded-full">
+                <div className="flex items-center space-x-2 px-3 py-1 bg-orange-900 text-orange-300 rounded-full">
                   <AlertTriangle className="w-4 h-4" />
                   <span className="text-sm font-medium">{alertCount} Alert{alertCount !== 1 ? 's' : ''}</span>
                 </div>
@@ -183,7 +183,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
               <button
                 onClick={fetchGames}
                 disabled={isLoading}
-                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
                 title="Refresh"
               >
                 <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
@@ -191,20 +191,20 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
               <button
                 onClick={() => setIsSettingsOpen(true)}
-                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
                 title="Settings"
               >
                 <Settings className="w-5 h-5" />
               </button>
 
-              <div className="flex items-center space-x-2 text-sm text-gray-600">
+              <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <Users className="w-4 h-4" />
                 <span>{user.email}</span>
               </div>
 
               <button
                 onClick={onLogout}
-                className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
                 title="Logout"
               >
                 <LogOut className="w-5 h-5" />
@@ -226,14 +226,14 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {/* Active Alerts Section */}
         {activeAlerts.length > 0 && (
           <div className="mb-8">
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+            <div className="bg-orange-900 border border-orange-700 rounded-lg p-4">
               <div className="flex items-center space-x-2 mb-3">
-                <AlertTriangle className="w-5 h-5 text-orange-600" />
-                <h2 className="font-medium text-orange-900">Active Streak Alerts</h2>
+                <AlertTriangle className="w-5 h-5 text-orange-400" />
+                <h2 className="font-medium text-orange-300">Active Streak Alerts</h2>
               </div>
               <div className="space-y-2">
                 {activeAlerts.map((alert, index) => (
-                  <div key={index} className="text-sm text-orange-800">
+                  <div key={index} className="text-sm text-orange-200">
                     {alert.message}
                   </div>
                 ))}
@@ -244,10 +244,10 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-8 bg-red-50 border border-red-200 rounded-lg p-4">
+          <div className="mb-8 bg-red-900 border border-red-700 rounded-lg p-4">
             <div className="flex items-center space-x-2">
-              <AlertTriangle className="w-5 h-5 text-red-600" />
-              <span className="text-red-800">{error}</span>
+              <AlertTriangle className="w-5 h-5 text-red-400" />
+              <span className="text-red-300">{error}</span>
             </div>
           </div>
         )}
@@ -256,7 +256,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {isLoading && (
           <div className="text-center py-12">
             <RefreshCw className="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-            <p className="text-gray-600">Loading games...</p>
+            <p className="text-gray-300">Loading games...</p>
           </div>
         )}
 
@@ -279,8 +279,8 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {!isLoading && games.length === 0 && !error && (
           <div className="text-center py-12">
             <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No games scheduled</h3>
-            <p className="text-gray-600">
+            <h3 className="text-lg font-medium text-white mb-2">No games scheduled</h3>
+            <p className="text-gray-300">
               There are no MLB games scheduled for {format(selectedDate, 'EEEE, MMMM d, yyyy')}.
             </p>
           </div>
