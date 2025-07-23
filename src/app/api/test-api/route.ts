@@ -35,7 +35,7 @@ export async function GET() {
       apiKey: `${apiKey.substring(0, 8)}...`,
       sports: {
         count: sports.length,
-        baseball: sports.find((sport: any) => sport.key === 'baseball_mlb') ? 'Available' : 'Not found'
+        baseball: sports.find((sport: Record<string, unknown>) => sport.key === 'baseball_mlb') ? 'Available' : 'Not found'
       },
       games: {
         count: todayGames.length,
