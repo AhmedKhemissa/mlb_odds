@@ -24,7 +24,7 @@ This guide covers deploying the MLB Odds Tracker to popular hosting platforms.
 ODDS_API_KEY=your_real_api_key_here
 ODDS_API_BASE_URL=https://api.the-odds-api.com/v4
 NEXTAUTH_URL=https://your-app-name.vercel.app
-NEXTAUTH_SECRET=your_secure_32_character_secret_here
+NEXTAUTH_SECRET=+BI2PK0ERzN4rBbZZuzurbJ/7bprcp26Bmczs81vU/k=
 ALLOWED_USERS=steven@example.com,user2@example.com
 NODE_ENV=production
 ```
