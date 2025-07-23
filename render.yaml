@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: mlb-odds-tracker
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/test-api
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ODDS_API_BASE_URL
+        value: https://api.the-odds-api.com/v4
+      - key: ODDS_API_KEY
+        sync: false
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXTAUTH_URL
+        sync: false
+      - key: ALLOWED_USERS
+        sync: false
