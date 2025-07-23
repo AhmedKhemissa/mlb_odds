@@ -279,7 +279,7 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
         {!isLoading && games.length > 0 && (
           <div>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-2">
-              <h2 className="text-xl sm:text-2xl font-bold text-white">Today's Games</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">Today&apos;s Games</h2>
               <div className="text-sm text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full self-start sm:self-auto">
                 {games.length} game{games.length !== 1 ? 's' : ''} scheduled
               </div>
