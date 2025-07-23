@@ -152,88 +152,103 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
   const alertCount = activeAlerts.length;
 
   return (
-    <div className="min-h-screen bg-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800">
       {/* Header */}
-      <header className="bg-gray-800 shadow-sm border-b border-gray-700">
+      <header className="bg-gray-800/80 backdrop-blur-md shadow-lg border-b border-gray-700/50 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Trophy className="w-8 h-8 text-blue-400" />
-                <h1 className="text-xl font-bold text-white">MLB Odds Tracker</h1>
+          <div className="flex flex-col lg:flex-row justify-between items-center py-4 lg:h-18 gap-4 lg:gap-0">
+            {/* Left Section - Logo and Status */}
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4 lg:space-x-6 w-full lg:w-auto">
+              <div className="flex items-center space-x-3">
+                <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl">
+                  <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                </div>
+                <div className="text-center sm:text-left">
+                  <h1 className="text-lg sm:text-xl font-bold text-white">MLB Odds Tracker</h1>
+                  <div className="text-xs text-gray-400 hidden sm:block">Live Betting Intelligence</div>
+                </div>
               </div>
               {lastUpdated && (
-                <div className="text-sm text-gray-300">
-                  <div>Last updated: {format(lastUpdated, 'h:mm:ss a')}</div>
-                  <div className="text-xs text-green-400">📡 Live data from The Odds API</div>
+                <div className="text-sm text-gray-300 bg-gray-700/50 px-3 py-2 rounded-lg border border-gray-600/30 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start space-x-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-xs sm:text-sm">Updated: {format(lastUpdated, 'h:mm:ss a')}</span>
+                  </div>
+                  <div className="text-xs text-emerald-400 mt-1">Live from The Odds API</div>
                 </div>
               )}
             </div>
 
-            <div className="flex items-center space-x-4">
+            {/* Right Section - Actions and User */}
+            <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 w-full lg:w-auto">
               {/* Active Alerts */}
               {alertCount > 0 && (
-                <div className="flex items-center space-x-2 px-3 py-1 bg-orange-900 text-orange-300 rounded-full">
-                  <AlertTriangle className="w-4 h-4" />
-                  <span className="text-sm font-medium">{alertCount} Alert{alertCount !== 1 ? 's' : ''}</span>
+                <div className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-300 rounded-full border border-orange-500/30 backdrop-blur-sm">
+                  <AlertTriangle className="w-4 h-4 animate-pulse" />
+                  <span className="text-sm font-semibold">{alertCount} Alert{alertCount !== 1 ? 's' : ''}</span>
                 </div>
               )}
 
-              {/* Action Buttons */}
-              <button
-                onClick={fetchGames}
-                disabled={isLoading}
-                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
-                title="Refresh"
-              >
-                <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
-              </button>
+              <div className="flex items-center space-x-2 w-full sm:w-auto justify-center">
+                {/* Action Buttons */}
+                <div className="flex items-center space-x-1 bg-gray-700/30 rounded-xl p-1 border border-gray-600/30">
+                  <button
+                    onClick={fetchGames}
+                    disabled={isLoading}
+                    className="p-2 text-gray-300 hover:text-white hover:bg-gray-600/50 rounded-lg transition-all duration-200"
+                    title="Refresh Data"
+                  >
+                    <RefreshCw className={`w-4 h-4 sm:w-5 sm:h-5 ${isLoading ? 'animate-spin' : ''}`} />
+                  </button>
 
-              <button
-                onClick={() => setIsSettingsOpen(true)}
-                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
-                title="Settings"
-              >
-                <Settings className="w-5 h-5" />
-              </button>
+                  <button
+                    onClick={() => setIsSettingsOpen(true)}
+                    className="p-2 text-gray-300 hover:text-white hover:bg-gray-600/50 rounded-lg transition-all duration-200"
+                    title="Alert Settings"
+                  >
+                    <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
+                  </button>
+                </div>
 
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <Users className="w-4 h-4" />
-                <span>{user.email}</span>
+                {/* User Info - Hidden on mobile, shown on larger screens */}
+                <div className="hidden sm:flex items-center space-x-2 bg-gray-700/30 rounded-xl px-3 py-2 border border-gray-600/30">
+                  <Users className="w-4 h-4 text-gray-400" />
+                  <span className="text-sm font-medium text-gray-300 truncate max-w-32 lg:max-w-none">{user.email}</span>
+                </div>
+
+                <button
+                  onClick={onLogout}
+                  className="p-2 text-gray-300 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all duration-200 border border-gray-600/30"
+                  title="Logout"
+                >
+                  <LogOut className="w-4 h-4 sm:w-5 sm:h-5" />
+                </button>
               </div>
-
-              <button
-                onClick={onLogout}
-                className="p-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors"
-                title="Logout"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Date Navigator */}
         <DateNavigator
           selectedDate={selectedDate}
           onDateChange={setSelectedDate}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         />
 
         {/* Active Alerts Section */}
         {activeAlerts.length > 0 && (
-          <div className="mb-8">
-            <div className="bg-orange-900 border border-orange-700 rounded-lg p-4">
+          <div className="mb-6 sm:mb-8">
+            <div className="bg-gradient-to-r from-orange-900/50 to-red-900/50 border border-orange-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm">
               <div className="flex items-center space-x-2 mb-3">
                 <AlertTriangle className="w-5 h-5 text-orange-400" />
-                <h2 className="font-medium text-orange-300">Active Streak Alerts</h2>
+                <h2 className="font-semibold text-orange-300">Active Streak Alerts</h2>
               </div>
               <div className="space-y-2">
                 {activeAlerts.map((alert, index) => (
-                  <div key={index} className="text-sm text-orange-200">
+                  <div key={index} className="text-sm text-orange-200 bg-orange-800/20 rounded-lg p-2">
                     {alert.message}
                   </div>
                 ))}
@@ -244,9 +259,9 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-8 bg-red-900 border border-red-700 rounded-lg p-4">
+          <div className="mb-6 sm:mb-8 bg-gradient-to-r from-red-900/50 to-red-800/50 border border-red-700/50 rounded-xl p-4 sm:p-6 backdrop-blur-sm">
             <div className="flex items-center space-x-2">
-              <AlertTriangle className="w-5 h-5 text-red-400" />
+              <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0" />
               <span className="text-red-300">{error}</span>
             </div>
           </div>
@@ -254,33 +269,41 @@ export default function Dashboard({ user, onLogout }: DashboardProps) {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="text-center py-12">
-            <RefreshCw className="w-8 h-8 text-gray-400 animate-spin mx-auto mb-4" />
-            <p className="text-gray-300">Loading games...</p>
+          <div className="text-center py-12 sm:py-16">
+            <RefreshCw className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400 animate-spin mx-auto mb-4" />
+            <p className="text-gray-300 text-sm sm:text-base">Loading games...</p>
           </div>
         )}
 
         {/* Games Grid */}
         {!isLoading && games.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {games.map(game => (
-              <GameCard
-                key={game.id}
-                game={game}
-                homeStreak={streaks.get(game.homeTeam.id)}
-                awayStreak={streaks.get(game.awayTeam.id)}
-                onThresholdAlert={hasThresholdAlert}
-              />
-            ))}
+          <div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6 gap-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-white">Today's Games</h2>
+              <div className="text-sm text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full self-start sm:self-auto">
+                {games.length} game{games.length !== 1 ? 's' : ''} scheduled
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              {games.map(game => (
+                <GameCard
+                  key={game.id}
+                  game={game}
+                  homeStreak={streaks.get(game.homeTeam.id)}
+                  awayStreak={streaks.get(game.awayTeam.id)}
+                  onThresholdAlert={hasThresholdAlert}
+                />
+              ))}
+            </div>
           </div>
         )}
 
         {/* No Games Message */}
         {!isLoading && games.length === 0 && !error && (
-          <div className="text-center py-12">
-            <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No games scheduled</h3>
-            <p className="text-gray-300">
+          <div className="text-center py-12 sm:py-16">
+            <Calendar className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg sm:text-xl font-medium text-white mb-2">No games scheduled</h3>
+            <p className="text-gray-300 text-sm sm:text-base px-4">
               There are no MLB games scheduled for {format(selectedDate, 'EEEE, MMMM d, yyyy')}.
             </p>
           </div>
